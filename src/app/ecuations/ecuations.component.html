@@ -1,0 +1,31 @@
+<div>
+  <h1>Sistemas de Ecuaciones</h1>
+  <h4>Andrés Enrique Sanabria Flores</h4>
+
+  <h3>Seleccione la cantidad de incógnitas</h3>
+  
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Cantidad - {{variablesNumber}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a *ngFor="let item of literals | slice:1:7 ; let i = index" (click)="setNumberOfVariables(i + 2)" class="dropdown-item">{{i + 2}}</a>
+    </div>
+
+    <div class="ecuations-grid">
+
+      <div class="ecuation-row" *ngFor="let li of selectedLiterals; let i = index">
+        <div class="value-container" *ngFor="let literal of selectedLiterals; let i2 = index"> 
+          <input type="number" [(ngModel)]="matrix[i][i2]" >
+          <p>{{literal}}</p>
+        </div>
+        <p class="equal-bold-text"> = </p>
+        <input class="independent-input" type="number"[(ngModel)]="matrix[i][variablesNumber]">
+      </div>
+  
+      <div (click)="solve()"> click </div>
+    </div>
+    
+
+  </div>
+</div>

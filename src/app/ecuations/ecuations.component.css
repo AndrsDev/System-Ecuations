@@ -1,0 +1,60 @@
+.ecuation{
+    display: flex;
+}
+
+.ecuations-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    /* align-content: center; */
+    justify-items: center;
+    grid-gap: 10px;
+}
+
+.ecuation-row{
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background-color: #ececec;
+    /* width: fit-content; */
+}
+
+.value-container p, .equal-bold-text{
+    margin: 0px;
+    margin-right: 12px;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.equal-bold-text{
+    font-weight: 700;
+    margin-left: 12px;
+    margin-right: 24px;
+}
+
+.value-container{
+    display: flex;
+}
+
+.value-container input, .independent-input{
+    width: 52px;
+    text-align: right;
+    border: 0px solid #bbbbbb;
+    border-radius: 6px;
+    padding-right: 8px;
+}
+
+/* Hide numeric up-down arrows CHROME*/
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+  
+
+/* Hide numeric up-down arrows Firefox*/
+input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0; 
+  }
