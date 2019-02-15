@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EcuationsComponent implements OnInit {
 
-  literals = ['x1','x2','x3','x4','x5','x6','x7'];
+  literals = ['a','b','c','d','e','f','g'];
   selectedLiterals;
   variablesNumber;
 
