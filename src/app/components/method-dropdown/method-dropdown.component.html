@@ -1,0 +1,7 @@
+
+<button class="btn btn-secondary dropdown-toggle btn-spacing" type="button" id="dropdownMethodMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Method - {{methods[selectedMethod]}}
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMethodMenuButton">
+  <a *ngFor="let item of methods; let i = index" (click)="setMethod(i)" class="dropdown-item">{{methods[i]}}</a>
+</div>

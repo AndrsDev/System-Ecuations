@@ -8,6 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class EcuationsComponent implements OnInit {
 
   literals = ['a','b','c','d','e','f','g'];
+  methods = [
+    'Reduction',
+    'Evening',
+    'Substitution',
+    'Cramer',
+    'Gauss',
+    'Gauss Jordan'
+  ]
+
+  selectedMethod;
   selectedLiterals;
   variablesNumber;
 
@@ -19,6 +29,7 @@ export class EcuationsComponent implements OnInit {
   ngOnInit() {
  
     this.setNumberOfVariables(2);
+    this.setMethod(5);
   }
 
   setNumberOfVariables(num){  
@@ -29,6 +40,10 @@ export class EcuationsComponent implements OnInit {
     for (let i = 0; i < num; i++) {
      this.matrix[i] = new Array(num + 1).fill("0"); 
     }
+  }
+
+  setMethod(num){
+    this.selectedMethod = num;
   }
 
 

@@ -7,7 +7,7 @@ import { EcuationsComponent } from './ecuations/ecuations.component';
 @NgModule({
   declarations: [
     AppComponent,
-    EcuationsComponent
+    EcuationsComponent,
   ],
   imports: [
     BrowserModule,

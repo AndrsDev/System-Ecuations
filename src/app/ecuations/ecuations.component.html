@@ -1,6 +1,6 @@
 <div>
   <div class="header">
-    <h1>Ecuation Systems Solver</h1>
+    <h1>Ecuation System Solver</h1>
   </div>
   
   <main class="main-container">
@@ -16,19 +16,24 @@
     <div class="option-menu">
 
       <!-- Method selection -->
-      <button class="btn btn-secondary dropdown-toggle btn-spacing" type="button" id="dropdownMethodMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Method - {{variablesNumber}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMethodMenuButton">
-        <a *ngFor="let item of literals | slice:1:7 ; let i = index" (click)="setNumberOfVariables(i + 2)" class="dropdown-item">{{i + 2}}</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle btn-spacing" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Method - {{methods[selectedMethod]}}
+        </button>
+        <div class="dropdown-menu">
+          <a *ngFor="let item of methods; let i = index" (click)="setMethod(i)" class="dropdown-item">{{methods[i]}}</a>
+        </div>
       </div>
 
       <!-- Number of variables selection -->
-      <button class="btn btn-secondary dropdown-toggle btn-spacing" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Number of variables - {{variablesNumber}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a *ngFor="let item of literals | slice:1:7 ; let i = index" (click)="setNumberOfVariables(i + 2)" class="dropdown-item">{{i + 2}}</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle btn-spacing" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Number of variables - {{variablesNumber}}
+        </button>
+        
+        <div class="dropdown-menu dropdown-primary">
+          <a *ngFor="let item of literals | slice:1:7 ; let i = index" (click)="setNumberOfVariables(i + 2)" class="dropdown-item">{{i + 2}}</a>
+        </div>
       </div>
   
     </div>
@@ -48,7 +53,5 @@
 
 
     </div>
-    
-
   </main>
 </div>
