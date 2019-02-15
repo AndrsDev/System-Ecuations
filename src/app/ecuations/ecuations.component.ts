@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EcuationsComponent implements OnInit {
 
+  steps = [];
+  rowStep = [];
+  stepsCounter = 0;
   literals = ['a','b','c','d','e','f','g'];
   methods = [
     'Reduction',
@@ -20,9 +23,12 @@ export class EcuationsComponent implements OnInit {
   selectedMethod;
   selectedLiterals;
   variablesNumber;
+  solved = false;
 
   matrix = [];
   result = [];
+  reductionRow = [];
+
 
   constructor() { }
 
@@ -33,6 +39,7 @@ export class EcuationsComponent implements OnInit {
   }
 
   setNumberOfVariables(num){  
+    this.solved = false;
     this.variablesNumber = num;
     this.selectedLiterals = this.literals.slice(0, num);
 
@@ -43,16 +50,20 @@ export class EcuationsComponent implements OnInit {
   }
 
   setMethod(num){
+    this.solved = false;
     this.selectedMethod = num;
   }
 
 
   solve(){
+    this.steps = [];
+    this.rowStep = [];
+    this.stepsCounter = 0;
     let matrix = this.matrix.slice();
 
     for (let column = 0; column < this.variablesNumber - 1; column++) {
       for (let row = column + 1; row < this.variablesNumber; row++) {
-        matrix[row] = this.operateRows(matrix[column], matrix[row], column);
+        matrix[row] = this.operateRows(matrix[column], matrix[row], column, row);
       }
     }
 
@@ -60,7 +71,7 @@ export class EcuationsComponent implements OnInit {
            
     for (let column = this.variablesNumber - 1; column > 0; column--) {
       for (let row = column - 1; row >= 0; row--) {
-        matrix[row] = this.operateRows(matrix[column], matrix[row], column);
+        matrix[row] = this.operateRows(matrix[column], matrix[row], column, row);
       }
     }
 
@@ -70,18 +81,33 @@ export class EcuationsComponent implements OnInit {
     }
 
     console.log(this.result);
+    console.log("Steps", this.steps);
+    this.solved = true;
 
   }
 
 
-  operateRows(row1, row2, column){
-    let newRow = [];
+  operateRows(row1, row2, column, row){
+
+
+
+    let newRow = []; 
+
+    this.steps.push(
+      "F" +  (row + 1).toString() + " = " +
+      row1[column].toString() + "F" +  (row + 1).toString() + 
+      " - " 
+      + row2[column].toString() + "F" + (column + 1).toString()
+    );
+
     for (let i = 0; i <= this.variablesNumber; i++) {
       const first = (row2[i]*row1[column]);
       const second = (row1[i]*row2[column]);
       newRow[i] =  first - second;
     }
-
+    
+    this.stepsCounter++;
+    this.rowStep.push(newRow.slice());
     return newRow;
   }
 

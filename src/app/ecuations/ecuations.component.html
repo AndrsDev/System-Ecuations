@@ -39,7 +39,6 @@
     </div>
   
     <div class="ecuations-grid">
-
       <div class="ecuation-row" *ngFor="let li of selectedLiterals; let i = index">
         <div class="value-container" *ngFor="let literal of selectedLiterals; let i2 = index"> 
           <input type="number" [(ngModel)]="matrix[i][i2]" >
@@ -48,10 +47,63 @@
         <p class="equal-bold-text"> = </p>
         <input class="independent-input" type="number"[(ngModel)]="matrix[i][variablesNumber]">
       </div>
-  
       <button class="primary-btn" (click)="solve()"> Solve </button>
-
-
     </div>
+
+    
+    <div class="block-grid">
+      <!-- Solution -->
+      <div *ngIf="solved" class="answer-container">
+        <h4>Solution</h4>
+        <br>
+        <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index"> 
+          <p class="spacing-bottom">{{literal + " = "}} {{result[i]}}</p>
+        </div>
+      </div>
+
+      <div *ngIf="solved" class="answer-container">
+        <h4>Step 1 - {{methods[selectedMethod]}}</h4>
+        <br>
+
+        <div *ngIf="selectedMethod === 0">
+          <div class="standard-row">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index"> 
+              <p *ngIf="matrix[0][i] >= 0 && i > 0"> + </p>
+              <p> {{matrix[0][i]+literal }}</p>
+            </div>       
+            <div class="value-container"> 
+              <p> = {{matrix[0][variablesNumber]}}</p>
+            </div>     
+          </div>
+          <div class="standard-row">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index"> 
+              <p *ngIf="matrix[1][i] >= 0 && i > 0"> + </p>
+              <p> {{matrix[1][i]+literal }}</p>
+            </div>
+            <div class="value-container"> 
+              <p> = {{matrix[1][variablesNumber]}}</p>
+            </div>     
+          </div>
+          <br>
+          <div class="standard-row">
+            <div class="value-container"> 
+            <p> <strong>{{steps[0]}}</strong></p>
+            </div>     
+          </div>
+          <div class="standard-row">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index"> 
+              <p *ngIf="matrix[1][i] >= 0 && i > 0"> + </p>
+              <p> {{rowStep[0][i]+literal }}</p>
+            </div>
+            <div class="value-container"> 
+              <p> = {{rowStep[0][variablesNumber]}}</p>
+            </div>     
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
   </main>
 </div>

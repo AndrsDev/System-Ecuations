@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { EcuationsComponent } from './ecuations/ecuations.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EcuationsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
