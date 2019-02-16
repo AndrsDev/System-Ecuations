@@ -9,6 +9,7 @@ export class EcuationsComponent implements OnInit {
 
   steps = [];
   rowStep = [];
+
   stepsCounter = 0;
   literals = ['a','b','c','d','e','f','g'];
   methods = [
@@ -28,6 +29,8 @@ export class EcuationsComponent implements OnInit {
   matrix = [];
   result = [];
   reductionRow = [];
+  evening1 = [];
+  evening2 = [];
 
 
   constructor() { }
@@ -84,15 +87,32 @@ export class EcuationsComponent implements OnInit {
     console.log("Steps", this.steps);
     this.solved = true;
 
+    this.solveEvening();
   }
 
+  solveEvening(){
+    let row1 = this.matrix[0].slice();
+    let row2 = this.matrix[1].slice();
+
+    for (let i = 1; i < this.variablesNumber; i++) {
+      row1[i] = row1[i]*(-1);
+      row2[i] = row2[i]*(-1);
+    }
+
+    for (let i = 1; i <= this.variablesNumber; i++) {
+      row1[i] = Math.round(row1[i]/row1[0] * 100)/100;
+      row2[i] = Math.round(row2[i]/row2[0] * 100)/100;
+    }
+
+    this.evening1 = row1.slice(1);
+    this.evening2 = row2.slice(1);
+
+    console.log("r1", this.evening1);
+    console.log("r2", this.evening2);
+  }
 
   operateRows(row1, row2, column, row){
-
-
-
     let newRow = []; 
-
     this.steps.push(
       "F" +  (row + 1).toString() + " = " +
       row1[column].toString() + "F" +  (row + 1).toString() + 
@@ -105,7 +125,7 @@ export class EcuationsComponent implements OnInit {
       const second = (row1[i]*row2[column]);
       newRow[i] =  first - second;
     }
-    
+
     this.stepsCounter++;
     this.rowStep.push(newRow.slice());
     return newRow;
