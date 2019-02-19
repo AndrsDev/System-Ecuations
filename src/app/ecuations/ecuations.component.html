@@ -209,6 +209,54 @@
         </div>
         <!-- END OF Substitution -->
 
+        <!-- CRAMER / GAUSS / GAUSS-JORDAN -->
+        <div *ngIf="selectedMethod > 2">
+          <div class="standard-row">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index">
+              <p *ngIf="matrix[0][i] >= 0 && i > 0"> + </p>
+              <p> {{matrix[0][i]+literal }}</p>
+            </div>
+            <div class="value-container">
+              <p> = {{matrix[0][variablesNumber]}}</p>
+            </div>
+          </div>
+          <div class="standard-row">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i = index">
+              <p *ngIf="matrix[1][i] >= 0 && i > 0"> + </p>
+              <p> {{matrix[1][i]+literal }}</p>
+            </div>
+            <div class="value-container">
+              <p> = {{matrix[1][variablesNumber]}}</p>
+            </div>
+          </div>
+          <br>
+          <br>
+
+          <div class="standard-row">
+            <div class="value-container">
+              <p> <strong>Increased Matrix</strong></p>
+            </div>
+          </div>
+
+          <div class="standard-row" *ngFor="let row of selectedLiterals; let i = index">
+            <div class="value-container" *ngFor="let literal of selectedLiterals; let i2 = index">
+              <div class="matrix-value">
+                <p>{{ matrix[i][i2] }}</p>
+              </div>
+            </div>
+            <div class="value-container">
+              <div class="matrix-value">
+                <p>| {{ matrix[i][variablesNumber] }}</p>
+              </div>
+            </div>
+
+          </div>
+
+         
+        </div>
+        <!-- END OF Substitution -->
+
+
       </div>
     </div>
 

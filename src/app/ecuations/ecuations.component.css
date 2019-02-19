@@ -127,3 +127,9 @@ input[type=number] {
 .standard-row{
     display: flex;
 }
+
+.matrix-value {
+    width: 62px;
+    text-align: left;
+
+}
