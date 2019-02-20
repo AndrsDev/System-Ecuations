@@ -64,6 +64,7 @@ export class EcuationsComponent implements OnInit {
     this.stepsCounter = 0;
     let matrix = this.matrix.slice();
 
+
     for (let column = 0; column < this.variablesNumber - 1; column++) {
       for (let row = column + 1; row < this.variablesNumber; row++) {
         matrix[row] = this.operateRows(matrix[column], matrix[row], column, row);
@@ -88,6 +89,7 @@ export class EcuationsComponent implements OnInit {
     this.solved = true;
 
     this.solveEvening();
+    this.solveCramer();
   }
 
   solveEvening(){
@@ -111,6 +113,31 @@ export class EcuationsComponent implements OnInit {
     console.log("r2", this.evening2);
   }
 
+  solveCramer(){
+    let matrix = this.matrix.slice();
+    let det = this.det(matrix.slice());
+
+    for (let i = 0; i < matrix.length; i++) {
+      matrix[i] = this.matrix[i].slice();
+    }
+    
+    console.log("main det", det);
+    
+    
+    for (let i = 0; i < matrix.length; i++) {
+      
+      for (let i3 = 0; i3 < matrix.length; i3++) {
+        matrix[i3] = this.matrix[i3].slice();
+      }
+ 
+      for (let i2 = 0; i2 < matrix.length; i2++) {
+        matrix[i2][i] = matrix[i2][matrix.length];
+      }
+      console.log("temp matrix", matrix);
+      console.log("det " + this.literals[i], this.det(matrix.slice())); 
+    }
+  }
+
   operateRows(row1, row2, column, row){
     let newRow = []; 
     this.steps.push(
@@ -129,6 +156,34 @@ export class EcuationsComponent implements OnInit {
     this.stepsCounter++;
     this.rowStep.push(newRow.slice());
     return newRow;
+  }
+
+  det(M) {
+    if (M.length == 2) { 
+      return (M[0][0]*M[1][1])-(M[0][1]*M[1][0]); 
+    }
+    
+    let answer = 0;
+    for (let i=0; i< M.length; i++) { 
+      answer += Math.pow(-1,i)*M[0][i] * this.det(this.deleteRowAndColumn(M,i)); 
+    }
+    return answer;
+  }
+
+  deleteRowAndColumn(M,index) {
+    let temp = [];
+
+    for (let i=0; i<M.length; i++) { 
+      temp.push(M[i].slice(0)); 
+    } 
+
+    temp.splice(0,1); 
+    
+    for (let i=0; i<temp.length; i++) { 
+      temp[i].splice(index,1); 
+    } 
+
+    return temp;
   }
 
 }
